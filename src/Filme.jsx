@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react'
 function Filme() {
 
     const[ titulo, setTitulo ] = useState( "" );
-    const[ descrição, setDescriçao ] = useState( "" );
+    const[ descricao, setDescricao ] = useState( "" );
     const[ ano, setAno ] = useState( "" );
-    const[ duração, setDuraçao] = useState( "" );
+    const[ duracao, setDuracao] = useState( "" );
     const[ categoria, setCategoria ] = useState( "" );
     const[ filme, setFilme ] = useState( "" );
     const[ erro, setErro ] = useState( false );
@@ -15,7 +15,7 @@ function Filme() {
     function Assistir( evento )
     {
         evento.preventDefault();
-        fetch( "http://10.139.75.32:8080/filmes",{
+        fetch( process.env.REACT_APP_BACKEND + "filmes",{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -23,9 +23,9 @@ function Filme() {
             body: JSON.stringify(
                 {
                     titulo: titulo,
-                    descrição: descrição,
+                    descricao: descricao,
                     ano: ano,
-                    duração: duração,
+                    duracao: duracao,
                     categoria: categoria,
                     capa: capa
                 }
@@ -34,7 +34,7 @@ function Filme() {
         .then( (resposta) => resposta.json() )
         .then( ( json ) => { 
 
-            if( json.titulo ) {
+            if( json._id ) {
                 setFilme( true );
                 setErro( false );
             } else {
@@ -48,9 +48,9 @@ function Filme() {
     useEffect( () => {
 
         setTitulo( "" );
-        setDescriçao( "" );
+        setDescricao( "" );
         setAno( "" );
-        setDuraçao( "" );
+        setDuracao( "" );
         setCategoria( "" );
         setCapa( "" );
 
@@ -71,8 +71,8 @@ function Filme() {
          }}>
              <Typography component="h1" variant='h6'> Cadastro de Filmes</Typography>
 
-             { erro && ( <Alert severity="warning" sx={{mt: 2, mb: 2 }} >Desculpe, tente novamente</Alert>)}
-             { filme && ( <Alert severity="success" sx={{mt: 2, mb: 2 }} >Obrigado por se cadastrar</Alert>)}
+             { erro && ( <Alert severity="warning" sx={{mt: 2, mb: 2 }} >Desculpe, tente novamente!</Alert>)}
+             { filme && ( <Alert severity="success" sx={{mt: 2, mb: 2 }} >Obrigado por se cadastrar!</Alert>)}
          <Box component="form" onSubmit={Assistir}>
             <TextField 
             type="text" 
@@ -88,8 +88,8 @@ function Filme() {
             label="Descrição" 
             variant="filled" 
             margin="normal"
-            value={descrição}
-            onChange={ (e) => setDescriçao( e.target.value ) } 
+            value={descricao}
+            onChange={ (e) => setDescricao( e.target.value ) } 
             fullWidth
             />
             <TextField 
@@ -106,8 +106,8 @@ function Filme() {
             label="Duração" 
             variant="filled" 
             margin="normal"
-            value={duração}
-            onChange={ (e) => setDuraçao( e.target.value ) } 
+            value={duracao}
+            onChange={ (e) => setDuracao( e.target.value ) } 
             fullWidth
             />
             <TextField 
@@ -132,8 +132,6 @@ function Filme() {
         </Box>
         </Box>
     </Container>     
-
   )
 }
-
 export default Filme;
