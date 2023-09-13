@@ -7,6 +7,7 @@ import Login from "./Login";
 import Cadastro from "./Cadastro";
 import Filme from "./Filme";
 import EditaFilme from './EditaFilme';
+import Produto from './Produto';
 
 const theme = createTheme({
   palette: {
@@ -48,12 +49,12 @@ const router = createBrowserRouter([
     element: <Cadastro />
   },
   {
-    path: "/filme",
-    element: <Filme />
-  },
-  {
     path: "/edicao/:id",
     element: <EditaFilme />
+  },
+  {
+    path: "/produto",
+    element: <Produto />
   }
 ]);
 

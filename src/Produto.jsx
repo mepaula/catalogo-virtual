@@ -1,33 +1,33 @@
 import { Alert, Box, Button, Container, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 
-function Filme() {
+function Produto() {
 
-    const[ titulo, setTitulo ] = useState( "" );
-    const[ descricao, setDescricao ] = useState( "" );
+    const[ marca, setMarca ] = useState( "" );
+    const[ tamanho, setTamanho ] = useState( "" );
     const[ ano, setAno ] = useState( "" );
-    const[ duracao, setDuracao] = useState( "" );
-    const[ categoria, setCategoria ] = useState( "" );
-    const[ filme, setFilme ] = useState( "" );
+    const[ cor, setCor] = useState( "" );
+    const[ estilo, setEstilo ] = useState( "" );
+    const[ produto, setProduto ] = useState( "" );
     const[ erro, setErro ] = useState( false );
-    const[ capa, setCapa ] = useState( "" );
+    const[ imagem, setImagem ] = useState( "" );
 
-    function Assistir( evento )
+    function Produto( evento )
     {
         evento.preventDefault();
-        fetch( process.env.REACT_APP_BACKEND + "filmes",{
+        fetch( process.env.REACT_APP_BACKEND + "produtos",{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(
                 {
-                    titulo: titulo,
-                    descricao: descricao,
+                    marca: marca,
+                    tamanho: tamanho,
                     ano: ano,
-                    duracao: duracao,
-                    categoria: categoria,
-                    capa: capa
+                    cor: cor,
+                    estilo: estilo,
+                    imagem: imagem
                 }
             )
         } )
@@ -35,26 +35,26 @@ function Filme() {
         .then( ( json ) => { 
 
             if( json._id ) {
-                setFilme( true );
+                setProduto( true );
                 setErro( false );
             } else {
                 setErro( true );
-                setFilme( false );
+                setProduto( false );
             }
         })
-        .catch( ( erro ) => { setErro( true ) } )
+        .catch( ( error ) => { setErro( true ) } )
     }
 
     useEffect( () => {
 
-        setTitulo( "" );
-        setDescricao( "" );
+        setMarca( "" );
+        setTamanho( "" );
         setAno( "" );
-        setDuracao( "" );
-        setCategoria( "" );
-        setCapa( "" );
+        setCor( "" );
+        setEstilo( "" );
+        setImagem( "" );
 
-    }, [ Filme ] );
+    }, [ Produto ] );
 
        
     return (
@@ -69,27 +69,27 @@ function Filme() {
             flexDirection: "column",
             alignItems: "center"
          }}>
-             <Typography component="h1" variant='h6'> Cadastro de Filmes</Typography>
+             <Typography component="h1" variant='h6'>Roupas</Typography>
 
              { erro && ( <Alert severity="warning" sx={{mt: 2, mb: 2 }} >Desculpe, tente novamente!</Alert>)}
-             { filme && ( <Alert severity="success" sx={{mt: 2, mb: 2 }} >Obrigado por se cadastrar!</Alert>)}
-         <Box component="form" onSubmit={Assistir}>
+             { produto && ( <Alert severity="success" sx={{mt: 2, mb: 2 }} >Obrigado por procurar a roupa!</Alert>)}
+         <Box component="form" onSubmit={Produto}>
             <TextField 
             type="text" 
-            label="Titulo" 
+            label="Marca" 
             variant="filled" 
             margin="normal"
-            value={titulo}
-            onChange={ (e) => setTitulo( e.target.value ) } 
+            value={marca}
+            onChange={ (e) => setMarca( e.target.value ) } 
             fullWidth
             />
             <TextField 
             type="text" 
-            label="Descrição" 
+            label="Tamanho" 
             variant="filled" 
             margin="normal"
-            value={descricao}
-            onChange={ (e) => setDescricao( e.target.value ) } 
+            value={tamanho}
+            onChange={ (e) => setTamanho( e.target.value ) } 
             fullWidth
             />
             <TextField 
@@ -102,36 +102,36 @@ function Filme() {
             fullWidth
             />
             <TextField 
-            type="time" 
-            label="Duração" 
+            type="text" 
+            label="Cor" 
             variant="filled" 
             margin="normal"
-            value={duracao}
-            onChange={ (e) => setDuracao( e.target.value ) } 
+            value={cor}
+            onChange={ (e) => setCor( e.target.value ) } 
             fullWidth
             />
             <TextField 
             type="text" 
-            label="Categoria" 
+            label="Estilo" 
             variant="filled" 
             margin="normal"
-            value={categoria}
-            onChange={ (e) => setCategoria( e.target.value ) } 
+            value={estilo}
+            onChange={ (e) => setEstilo( e.target.value ) } 
             fullWidth
             />
             <TextField 
             type="text" 
-            label="Capa do Filme" 
+            label="Imagem da roupa" 
             variant="filled" 
             margin="normal"
-            value={capa}
-            onChange={ (e) => setCapa( e.target.value ) } 
+            value={imagem}
+            onChange={ (e) => setImagem( e.target.value ) } 
             fullWidth
             />
-            <Button type="submit" variant="contained"  size="large" fullWidth sx={ { mt:2, mb:2 }}>Cadastro Filmes</Button>
+            <Button type="submit" variant="contained"  size="large" fullWidth sx={ { mt:2, mb:2 }}>Procurar roupas</Button>
         </Box>
         </Box>
     </Container>     
   )
 }
-export default Filme;
+export default Produto;
