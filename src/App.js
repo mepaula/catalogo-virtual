@@ -1,11 +1,12 @@
 import { Avatar, Button, Container } from "@mui/material";
 import "./global.css"
 import { useEffect, useState } from "react";
-import Filme from "./components/Filme";
+import Roupa from "./components/Roupa";
+import Menu from "./components/MenuResponsivo.jsx";
 
 function App() {
 
-  const[ filmes, setFilmes ] = useState();
+  const[ roupa, setRoupa ] = useState();
   const[ erro, setErro ] = useState();
 
   useEffect( () => {
@@ -16,7 +17,7 @@ function App() {
           },
       } )
       .then( (resposta) => resposta.json() )
-      .then( ( json ) => { setFilmes( json ) })
+      .then( ( json ) => { setRoupa( json ) })
       .catch( ( erro ) => { setErro( true ) } )
 
 
@@ -35,15 +36,16 @@ function Excluir( evento, id ) {
         } )
         .then( (resposta) => resposta.json() )
         .then( ( json ) => { 
-            const novalista = filmes.filter( (filme ) => filme._id !== id );
-            setFilmes( novalista );
+            const novalista = roupa.filter( (roupa ) => roupa._id !== id );
+            setRoupa( novalista );
         })
         .catch( ( error ) => { setErro( true ) } )
 }  
 
   return (
     <>
-      <h1>Filmes</h1>
+      <Menu />
+      <h1>Produtos Disponíveis</h1>
       <Container sx={{
         display: "flex",
         flexFlow: "row",
@@ -51,17 +53,15 @@ function Excluir( evento, id ) {
         gap: "2rem"
       }}>
 
-      { filmes && (
-          filmes.map( (filme, index ) => ( 
-            <Filme 
-                imagem={filme.imagem}
-                titulo={filme.titulo}
-                descricao={filme.descricao}
-                categoria={filme.categoria}
-                ano={filme.ano}
-                duracao={filme.duracao}
-                excluir={ (e) => Excluir( e, filme._id ) }
-                id={filme._id}
+      { roupa && (
+          roupa.map( (roupa, index ) => ( 
+            <Roupa 
+                imagem={roupa.imagem}
+                marca={roupa.marca}
+                tamanho={roupa.tamanho}
+                estilo={roupa.estilo}
+                excluir={ (e) => Excluir( e,roupa._id ) }
+                id={roupa._id}
             />
           ) )
       )}

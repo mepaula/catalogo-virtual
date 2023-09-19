@@ -1,6 +1,6 @@
 import { Card, CardActionArea, CardContent, CardMedia, Grid, Link, Typography } from '@mui/material'
 
-function Filme(props) {
+function Roupa(props) {
   return (
     <Card sx={{ maxWidth: 345 }}>
         <CardActionArea>
@@ -8,24 +8,18 @@ function Filme(props) {
                 component="img"
                 height="140"
                 image={props.imagem}
-                alt={props.titulo}
+                alt={props.marca}
             />
             <CardContent>
                 <Typography variant="h5" component="div">
-                    {props.titulo}
+                    {props.marca}
                 </Typography>
                 <Typography variant="body2" component="text.secondary">
-                    {props.descricao}
+                    {props.tamanho}
                 </Typography>
                 <Grid container>
-                    <Grid item xs={2}>
-                        <span>{props.categoria}</span>
-                    </Grid>
                     <Grid item >
-                        <span>{props.ano}</span>
-                    </Grid>
-                    <Grid item >
-                        <span>{props.duracao}</span>
+                        <span>{props.estilo}</span>
                     </Grid>
 
                 </Grid>
@@ -43,4 +37,4 @@ function Filme(props) {
   )
 }
 
-export default Filme
+export default Roupa;

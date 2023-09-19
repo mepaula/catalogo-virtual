@@ -1,8 +1,8 @@
 import { Alert, Box, Button, Checkbox, Container, FormControlLabel, Grid, TextField, Typography } from '@mui/material';
 import React from 'react'
-
 import { useState, useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
+import MenuResponsivo from './components/MenuResponsivo';
 
 
 function Login() {
@@ -57,11 +57,14 @@ function Login() {
 
   return (
     
+    <>
+    <MenuResponsivo />
+
     <Container component="section" maxWidth="xs">
         <Box 
         sx={{
             mt: 10,
-            backgroundColor: "#a7f",
+            backgroundColor: "#9003fc",
             padding: "50px",
             borderRadius: "10px",
             display: "flex",
@@ -69,7 +72,7 @@ function Login() {
             alignItems: "center"
             
         }}>
-            <Typography component="h1" variant='h4'>Entrar</Typography>
+            <Typography component="h1" variant='h4'>Login</Typography>
             { erro && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }}>Revise seus dados e tente novamente</Alert>) }
             <Box component="form" onSubmit={Autenticar}>
                 <TextField 
@@ -94,7 +97,7 @@ function Login() {
                     control={ <Checkbox value={lembrar} name="lembrar" onChange={(e) => setLembrar( !lembrar) } /> }
                     label="Lembrar-me"
                 />
-                <Button type="submit" variant="contained" fullWidth sx={ { mt:2, mb:2 }}>Login</Button>
+                <Button type="submit" variant="contained" fullWidth sx={ { mt:2, mb:2 }}>Login Feito</Button>
                 <Grid container>
                     <Grid item xs>
                         Esqueci Senha
@@ -106,6 +109,7 @@ function Login() {
             </Box>
         </Box>
     </Container>
+    </>
   )
 }
 

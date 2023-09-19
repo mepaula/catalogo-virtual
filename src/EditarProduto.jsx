@@ -1,18 +1,18 @@
 import { Alert, Box, Button, Container, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import MenuResponsivo from "./components/MenuResponsivo";
 
-function EditaFilme() {
+function EditaProduto() {
 
     const { id } = useParams();
-    const[ titulo, setTitulo ] = useState( "" );
-    const[ descricao, setDescricao ] = useState( "" );
-    const[ ano, setAno ] = useState( "" );
-    const[ duracao, setDuracao ] = useState( "" );
+    const[ marca, setMarca ] = useState( "" );
+    const[ estilo, setEstilo ] = useState( "" );
+    const[ tamanho, setTamanho ] = useState( "" );
+    const[ colecao, setColecao ] = useState( "" );
     const[ imagem, setImagem ] = useState( "" );
     const[ editar, setEditar ] = useState( false );
     const[ erro, setErro ] = useState( false );
-    const[ categoria, setCategoria ] =  useState( "" );
 
     function Editar( evento ) {
 
@@ -25,12 +25,11 @@ function EditaFilme() {
             body: JSON.stringify(
                 {
                     id: id,
-                    titulo: titulo,
-                    descricao: descricao,
-                    ano: ano,
-                    duracao: duracao,
-                    categoria: categoria,
-                    imagem: imagem
+                    marca: marca,
+                    estilo: estilo,
+                    tamanho: tamanho,
+                    imagem: imagem,
+                    colecao: colecao
                 }
             )
         } )
@@ -58,12 +57,11 @@ function EditaFilme() {
         .then((resposta) => resposta.json())
         .then((json) => {
             if( !json.status ) {
-                setTitulo( json.titulo );
-                setDescricao( json.descricao );
-                setAno( json.ano );
-                setDuracao( json.duracao );
+                setMarca( json.marca );
+                setEstilo( json.estilo );
+                setTamanho( json.tamanho );
                 setImagem( json.imagem );
-                setCategoria( json.categoria )
+                setColecao( json.colecao )
             } else {
                 setErro( "Filme não encontardo" );
             }
@@ -72,16 +70,21 @@ function EditaFilme() {
     }, [] );
 
   return (
+
+    <>
+    <MenuResponsivo/>
     <Container component="section" maxWidth="xs">
         <Box sx={{
-            mt: 10,
-            backgroundColor: "#a7f",
+            mt: 5,
+            backgroundColor: "#9003fc",
             padding: "30px",
             borderRadius: "10px",
             display: "flex",
             flexDirection: "column",
             alignItems: "center"
-         }}>    
+         }}>  
+
+         <Typography component="h1" variant='h5'>Cadastro da Roupa</Typography>  
 
          { erro && ( <Alert severity="warning">Não foi possível editar</Alert>)}
          { editar && ( <Alert severity="success">Filme editado com sucesso</Alert>)}
@@ -89,64 +92,56 @@ function EditaFilme() {
          <Box component="form" onSubmit={Editar}>
          <TextField 
             type="text" 
-            label="Titulo" 
+            label="Marca:" 
             variant="filled" 
             margin="normal"
-            value={titulo}
-            onChange={ (e) => setTitulo( e.target.value ) } 
+            value={marca}
+            onChange={ (e) => setMarca( e.target.value ) } 
             fullWidth
             />
             <TextField 
             type="text" 
-            label="Descrição" 
+            label="Estilo:" 
             variant="filled" 
             margin="normal"
-            value={descricao}
-            onChange={ (e) => setDescricao( e.target.value ) } 
-            fullWidth
-            />
-            <TextField 
-            type="date" 
-            label="Ano" 
-            variant="filled" 
-            margin="normal"
-            value={ano}
-            onChange={ (e) => setAno( e.target.value ) } 
-            fullWidth
-            />
-            <TextField 
-            type="time" 
-            label="Duração" 
-            variant="filled" 
-            margin="normal"
-            value={duracao}
-            onChange={ (e) => setDuracao( e.target.value ) } 
+            value={estilo}
+            onChange={ (e) => setEstilo( e.target.value ) } 
             fullWidth
             />
             <TextField 
             type="text" 
-            label="Categoria" 
+            label="Tamanho da Roupa:" 
             variant="filled" 
             margin="normal"
-            value={categoria}
-            onChange={ (e) => setCategoria( e.target.value ) } 
+            value={tamanho}
+            onChange={ (e) => setTamanho( e.target.value ) } 
             fullWidth
             />
             <TextField 
             type="text" 
-            label="Imagem do filme" 
+            label="Coleção:" 
+            variant="filled" 
+            margin="normal"
+            value={colecao}
+            onChange={ (e) => setColecao( e.target.value ) } 
+            fullWidth
+            />
+            <TextField 
+            type="text" 
+            label="Imagem da Roupa:" 
             variant="filled" 
             margin="normal"
             value={imagem}
             onChange={ (e) => setImagem( e.target.value ) } 
             fullWidth
-            />          
-         
-            <Button type="submit" variant="contained"  size="large" fullWidth sx={ { mt:2, mb:2 }}>Editar Filme</Button>
+            />
+                   
+            <Button type="submit" variant="contained"  size="large" fullWidth sx={ { mt:2, mb:2 }}>Cadastro Feito</Button>
          </Box>
         </Box> 
     </Container>
+    </>
   )
 }
 
-export default EditaFilme;
+export default EditaProduto;
