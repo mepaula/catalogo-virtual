@@ -1,18 +1,19 @@
 import { Alert, Box, Button, Container, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react'
+import MenuResponsivo from './components/MenuResponsivo';
 
-function Produto() {
+function Roupa() {
 
-    const[ marca, setMarca ] = useState( "" );
-    const[ tamanho, setTamanho ] = useState( "" );
+    const[ titulo, setTitulo ] = useState( "" );
+    const[ descricao, setDescricao ] = useState( "" );
     const[ ano, setAno ] = useState( "" );
-    const[ cor, setCor] = useState( "" );
-    const[ estilo, setEstilo ] = useState( "" );
+    const[ duracao, setDuracao] = useState( "" );
+    const[ categoria, setCategoria ] = useState( "" );
     const[ produto, setProduto ] = useState( "" );
     const[ erro, setErro ] = useState( false );
     const[ imagem, setImagem ] = useState( "" );
 
-    function Produto( evento )
+    function Cadastrar( evento )
     {
         evento.preventDefault();
         fetch( process.env.REACT_APP_BACKEND + "produtos",{
@@ -22,12 +23,13 @@ function Produto() {
             },
             body: JSON.stringify(
                 {
-                    marca: marca,
-                    tamanho: tamanho,
+                    titulo: titulo,
+                    descricao: descricao,
                     ano: ano,
-                    cor: cor,
-                    estilo: estilo,
-                    imagem: imagem
+                    duracao: duracao,
+                    categoria: categoria,
+                    imagem: imagem,
+                    usuario: localStorage.getItem( "usuario" )
                 }
             )
         } )
@@ -47,18 +49,20 @@ function Produto() {
 
     useEffect( () => {
 
-        setMarca( "" );
-        setTamanho( "" );
+        setTitulo( "" );
+        setDescricao( "" );
         setAno( "" );
-        setCor( "" );
-        setEstilo( "" );
+        setDuracao( "" );
+        setCategoria( "" );
         setImagem( "" );
 
-    }, [ Produto ] );
+    }, [ Roupa ] );
 
        
     return (
 
+        <>
+        <MenuResponsivo/>
     <Container component="section" maxWidth="xs">
         <Box sx={{
             mt: 10,
@@ -73,23 +77,23 @@ function Produto() {
 
              { erro && ( <Alert severity="warning" sx={{mt: 2, mb: 2 }} >Desculpe, tente novamente!</Alert>)}
              { produto && ( <Alert severity="success" sx={{mt: 2, mb: 2 }} >Obrigado por procurar a roupa!</Alert>)}
-         <Box component="form" onSubmit={Produto}>
+         <Box component="form" onSubmit={Cadastrar}>
             <TextField 
             type="text" 
-            label="Marca" 
+            label="Titulo" 
             variant="filled" 
             margin="normal"
-            value={marca}
-            onChange={ (e) => setMarca( e.target.value ) } 
+            value={titulo}
+            onChange={ (e) => setTitulo( e.target.value ) } 
             fullWidth
             />
             <TextField 
             type="text" 
-            label="Tamanho" 
+            label="Descrição" 
             variant="filled" 
             margin="normal"
-            value={tamanho}
-            onChange={ (e) => setTamanho( e.target.value ) } 
+            value={descricao}
+            onChange={ (e) => setDescricao( e.target.value ) } 
             fullWidth
             />
             <TextField 
@@ -103,20 +107,20 @@ function Produto() {
             />
             <TextField 
             type="text" 
-            label="Cor" 
+            label="Duração" 
             variant="filled" 
             margin="normal"
-            value={cor}
-            onChange={ (e) => setCor( e.target.value ) } 
+            value={duracao}
+            onChange={ (e) => setDuracao( e.target.value ) } 
             fullWidth
             />
             <TextField 
             type="text" 
-            label="Estilo" 
+            label="Categoria" 
             variant="filled" 
             margin="normal"
-            value={estilo}
-            onChange={ (e) => setEstilo( e.target.value ) } 
+            value={categoria}
+            onChange={ (e) => setCategoria( e.target.value ) } 
             fullWidth
             />
             <TextField 
@@ -131,7 +135,8 @@ function Produto() {
             <Button type="submit" variant="contained"  size="large" fullWidth sx={ { mt:2, mb:2 }}>Procurar roupas</Button>
         </Box>
         </Box>
-    </Container>     
+    </Container> 
+    </>    
   )
 }
-export default Produto;
+export default Roupa;

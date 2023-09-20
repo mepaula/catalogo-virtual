@@ -79,10 +79,10 @@ function MenuResponsivo() {
                 <Typography textAlign="center">Login</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Cadastro do Produtos</Typography>
+                <Typography textAlign="center">Cadastro</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Editar Produto</Typography>
+                <Typography textAlign="center">Cadastrar Produto</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">Sair</Typography>
@@ -100,13 +100,13 @@ function MenuResponsivo() {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              <a href='./Cadastro'>Cadastrar Produto</a>
+              <a href='./Cadastro'>Cadastrar</a>
             </Button>
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-              <a href='./EditarProduto'>Editar Produto</a>
+              <a href='./Roupa'>Cadastrar Produto</a>
             </Button>
             <Button
               onClick={handleCloseNavMenu}

@@ -8,18 +8,18 @@ function Roupa(props) {
                 component="img"
                 height="140"
                 image={props.imagem}
-                alt={props.marca}
+                alt={props.titulo}
             />
             <CardContent>
                 <Typography variant="h5" component="div">
-                    {props.marca}
+                    {props.titulo}
                 </Typography>
                 <Typography variant="body2" component="text.secondary">
-                    {props.tamanho}
+                    {props.descricao}
                 </Typography>
                 <Grid container>
                     <Grid item >
-                        <span>{props.estilo}</span>
+                        <span>{props.duracao}</span>
                     </Grid>
 
                 </Grid>

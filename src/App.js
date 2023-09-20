@@ -8,9 +8,13 @@ function App() {
 
   const[ roupa, setRoupa ] = useState();
   const[ erro, setErro ] = useState();
+  const[ usuario, setUsuario ] = useState( "" );
 
   useEffect( () => {
-      fetch( process.env.REACT_APP_BACKEND + "filmes",{
+
+      const usuario = localStorage.getItem( "usuario" );
+
+      fetch( process.env.REACT_APP_BACKEND + "produtos/" + usuario , {
           method: "GET",
           headers: {
               'Content-Type': 'application/json'
@@ -25,13 +29,14 @@ function App() {
 
 function Excluir( evento, id ) {
   evento.preventDefault();
-        fetch( process.env.REACT_APP_BACKEND + "filmes",{
+        fetch( process.env.REACT_APP_BACKEND + "produtos",{
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                    id: id 
+                id: id,
+                usuario: localStorage.getItem( "usuario" )
             })
         } )
         .then( (resposta) => resposta.json() )
@@ -56,10 +61,10 @@ function Excluir( evento, id ) {
       { roupa && (
           roupa.map( (roupa, index ) => ( 
             <Roupa 
-                imagem={roupa.imagem}
-                marca={roupa.marca}
-                tamanho={roupa.tamanho}
-                estilo={roupa.estilo}
+                titulo={roupa.titulo}
+                descricao={roupa.descricao}
+                ano={roupa.ano}
+                duracao={roupa.duracao}
                 excluir={ (e) => Excluir( e,roupa._id ) }
                 id={roupa._id}
             />

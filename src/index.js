@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from "./Login";
 import Cadastro from "./Cadastro";
 import EditarProduto from './EditarProduto';
-import Produto from './Produto';
+import Roupa from './Roupa';
 
 
 const theme = createTheme({
@@ -53,8 +53,8 @@ const router = createBrowserRouter([
     element: <EditarProduto />
   },
   {
-    path: "/produto",
-    element: <Produto />
+    path: "/roupa",
+    element: <Roupa />
   }
 ]);
 
